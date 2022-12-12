@@ -20,15 +20,14 @@ public class App {
         try {
             sessionFactory = new MetadataSources(registry).addAnnotatedClass(Event.class).buildMetadata().buildSessionFactory();
         } catch (Exception e) {
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
             StandardServiceRegistryBuilder.destroy(registry);
         }
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(new Event("Our very first event!", new Date()));
+        session.save(new Event(1990.00, new Date()));
+        session.save(new Event(10000, new Date()));
         session.getTransaction().commit();
         session.close();
 
@@ -36,7 +35,7 @@ public class App {
         session.beginTransaction();
         List result = session.createQuery("from Event").list();
         for (Event event : (List<Event>) result) {
-            System.out.println("Event (" + event.getDate() + ") : " + event.getTitle());
+            System.out.println("Event (" + event.getDate() + ") : " + event.getBalance());
         }
         session.getTransaction().commit();
         session.close();

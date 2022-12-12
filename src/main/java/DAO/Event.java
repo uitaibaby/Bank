@@ -5,18 +5,18 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "EVENTS")
+@Table(name = "userdata")
 @Entity
 public class Event {
 
     private Long id;
-    private String title;
+    private double balance;
     private Date date;
 
     public Event() {}
 
-    public Event(String title, Date date) {
-        this.title = title;
+    public Event(double balance, Date date) {
+        this.balance = balance;
         this.date = date;
     }
 
@@ -31,13 +31,13 @@ public class Event {
         this.id = id;
     }
 
-    @Column(name = "TITLE")
-    public String getTitle() {
-        return title;
+    @Column(name = "Balance")
+    public double getBalance() {
+        return balance;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     @Column(name = "EVENT_DATE")
